@@ -1,10 +1,8 @@
 # 在文件顶部添加全局字典
 from langchain.agents import AgentExecutor, create_react_agent
 from langchain.memory import ConversationBufferWindowMemory
-import tools
 import json
-import llm
-import prompt
+from app import prompt, llm, tools
 
 # 创建全局字典存储用户记忆
 user_memories = {}
