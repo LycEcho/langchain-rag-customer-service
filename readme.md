@@ -10,3 +10,9 @@
 # 后期待开发功能
 ##  支持chroma向量数据库永久保存聊天记录
 ## 支持api提问
+
+
+# 运行方式
+``` python run tools_retriever.py```
+or
+```python run api.py```
