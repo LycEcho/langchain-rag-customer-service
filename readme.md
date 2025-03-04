@@ -1,5 +1,6 @@
 # langchain Rag-Agent模式 AI客服
-
+# 效果
+![img.png](img.png)
 # 整体逻辑
 ## 区分不同的用户提问 => 根据提问的问题 => 提取出关键词  => 组成json => 请求 后端api 拿到数据 => 再返回给llm 大模型 根据json返回的数据 => 回答客户
 

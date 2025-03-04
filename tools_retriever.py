@@ -80,5 +80,5 @@ history_json = json.dumps({
         # {"user": "我是谁", "bot": "你是陈老师"}
     ]
 })
-response3 = process_customer_question("我是谁", user_id="user_789", chat_history=history_json)
+response3 = process_customer_question("昨天有什么订单发货了", user_id="user_789", chat_history=history_json)
 print(response3)
