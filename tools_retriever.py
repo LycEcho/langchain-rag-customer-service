@@ -1,7 +1,6 @@
 # 在文件顶部添加导入
-
-import json
-from lib import llm
+from service.llm import LlmService
+from service.chatHistoryStrore import ChatHistoryStoreService
 
 # # 用户A的对话
 # response1 = process_customer_question("昨天的发货情况", user_id="user_123")
@@ -19,7 +18,9 @@ from lib import llm
 #     ]
 # })
 # response3 = llm.process_customer_question("我是林先生", user_id="user_789", chat_history=history_json)
-response3 = llm.process_customer_question("我是谁？", user_id="user_111")
+
+#ChatHistoryStoreService.delete_user_history("user_789")
+response3 = LlmService.process_customer_question("我是小小，我要查订单数据", user_id="user_111")
 print(response3)
-response3 = llm.process_customer_question("我是谁？", user_id="user_789")
-print(response3)
+# response3 = llm.process_customer_question("我是谁？", user_id="user_789")
+# print(response3)
