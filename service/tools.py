@@ -41,7 +41,7 @@ class Tools:
 
         # 如果没有找到任何信息，添加提示
         if not date_found and not type_found:
-            json_data["message"] = "未找到日期或类型信息，请提供更多细节"
+            json_data["message"] = ""
 
         return json.dumps(json_data, ensure_ascii=False)
 
@@ -57,7 +57,7 @@ class Tools:
         elif "购买" in query and "明天" in query:
             tomorrow = (datetime.strptime(current_date, "%Y-%m-%d") + timedelta(days=1)).strftime("%Y-%m-%d")
             return f"搜索结果：{tomorrow}的购买计划：计划购买商品X（数量20）和商品Y（数量15）。"
-        return "暂无相关信息，请提供更具体的问题或上下文。"
+        return ""
 
     # 工具3：X平台搜索（模拟实现，实际中可调用X API）
     def x_search(self,query):
@@ -68,23 +68,23 @@ class Tools:
             return "X帖子：用户@logistics提到，昨天发货了3个包裹。"
         elif "购买" in query:
             return "X帖子：用户@buyer计划明天购买商品X和商品Y。"
-        return "X上暂无相关信息。"
+        return ""
 
     def get(self):
         return [
             Tool(
                 name="extract_json",
                 func=self.extract_json_from_question,
-                description="从用户问题中提取日期和类型信息，返回JSON格式。输入应为原始问题，输出示例：{'date':'2025-03-03','type':'order'}"
+                description="非必须，如果用户中问题含有日期和类型信息就提取出来，返回JSON格式。输入应为原始问题，输出示例：{'date':'2025-03-03','type':'order'}"
             ),
             Tool(
                 name="web_search",
                 func=self.web_search,
-                description="从网络搜索订单、发货或购买信息。"
+                description="非必须，从网络搜索订单、发货或购买信息。"
             ),
-            Tool(
-                name="x_search",
-                func=self.x_search,
-                description="这里可以找到用户讲了什么"
-            )
+            # Tool(
+            #     name="x_search",
+            #     func=self.x_search,
+            #     description="这里是论坛，可以找到用户回答了什么"
+            # )
         ]
