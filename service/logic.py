@@ -16,10 +16,14 @@ class Logic:
     def summarize_user_history(self, user_id: str):
         return ChatHistoryStoreService.summarize_user_history(user_id=user_id, llmService=LlmService)
 
-    def generate_text_agent(self, question: str, user_id: Optional[str] = None,
-                            chat_history: Optional[List[ChatHistoryConstant]] = None,
-                            prompt: PromptTemplate = ChatPrompt().agent(), tools: List[Any] = Tools().get(),
-                            use_history: bool = True) -> str:
-        return LlmService.generate_text_agent(question=question, user_id=user_id, chat_history=chat_history,
-                                              prompt=prompt, tools=tools, use_history=use_history,
-                                              chatHistoryStoreService=ChatHistoryStoreService)
+    def generate_text_agent(self, question: str, user_id: Optional[str] = None, 
+                           store_id: Optional[str] = None,
+                           chat_history: Optional[List[ChatHistoryConstant]] = None,
+                           prompt: PromptTemplate = None,
+                           tools: List[Any] = None,
+                           use_history: bool = True) -> str:
+        return LlmService.generate_text_agent(question=question, user_id=user_id, 
+                                             store_id=store_id,
+                                             chat_history=chat_history,
+                                             prompt=prompt, tools=tools, use_history=use_history,
+                                             chatHistoryStoreService=ChatHistoryStoreService)

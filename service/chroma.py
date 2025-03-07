@@ -89,8 +89,8 @@ class Chroma:
 
         if chunks:
             document = chunks[10] if len(chunks) > 10 else chunks[0]
-            print(document.page_content)
-            print(document.metadata)
+            # print(document.page_content)
+            # print(document.metadata)
 
         return chunks
 

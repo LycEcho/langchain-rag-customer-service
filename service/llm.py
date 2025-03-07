@@ -99,8 +99,9 @@ class LLM:
             self,
             question: str,
             user_id: Optional[str] = None,
-            prompt: PromptTemplate = ChatPrompt().agent(),
-            tools: List[Any] = Tools().get(),
+            store_id: Optional[str] = None,
+            prompt: PromptTemplate = None,
+            tools: List[Any] = None,
             chatHistoryStoreService: any = None
     ) -> str:
 
@@ -122,7 +123,9 @@ class LLM:
         # 直接执行查询，不使用历史记录
         response = agent_executor.invoke({
             "input": question,
-            "chat_history": ""
+            "chat_history": "",
+            "user_id": user_id,
+            "store_id": store_id
         })
         output = response["output"]
 
@@ -137,9 +140,10 @@ class LLM:
             self,
             question: str,
             user_id: Optional[str] = None,
+            store_id: Optional[str] = None,
             chat_history: Optional[List[ChatHistoryConstant]] = None,
-            prompt: PromptTemplate = ChatPrompt().agent(),
-            tools: List[Any] = Tools().get(),
+            prompt: PromptTemplate = None,
+            tools: List[Any] = None,
             chatHistoryStoreService: any = None
     ) -> str:
         """使用历史记录的agent模式
@@ -154,6 +158,8 @@ class LLM:
         Returns:
             str: 模型生成的回复
         """
+
+
         # 使用辅助方法创建agent执行器
         agent_executor = self._create_agent_executor(prompt, tools)
 
@@ -194,7 +200,9 @@ class LLM:
 
         response = agent_executor.invoke({
             "input": question,
-            "chat_history": chat_history_value
+            "chat_history": chat_history_value,
+            "user_id": user_id,
+            "store_id":store_id
         })
 
         output = response["output"]
@@ -213,9 +221,10 @@ class LLM:
             self,
             question: str,
             user_id: Optional[str] = None,
+            store_id: Optional[str] = None,
             chat_history: Optional[List[ChatHistoryConstant]] = None,
-            prompt: PromptTemplate = ChatPrompt().agent(),
-            tools: List[Any] = Tools().get(),
+            prompt: PromptTemplate = None,
+            tools: List[Any] = None,
             use_history: bool = True,
             chatHistoryStoreService: any = None
     ) -> str:
@@ -232,13 +241,17 @@ class LLM:
         Returns:
             str: 模型生成的回复
         """
+        if prompt is None:
+            prompt = ChatPrompt().agent()
+        if tools is None:
+            tools = Tools().get()
 
         if use_history:
-            return self.generate_text_agent_with_history(question=question, user_id=user_id, chat_history=chat_history,
+            return self.generate_text_agent_with_history(question=question, user_id=user_id,store_id=store_id, chat_history=chat_history,
                                                          prompt=prompt, tools=tools,
                                                          chatHistoryStoreService=chatHistoryStoreService)
         else:
-            return self.generate_text_agent_without_history(question=question, user_id=user_id,
+            return self.generate_text_agent_without_history(question=question, user_id=user_id,store_id=store_id,
                                                             prompt=prompt, tools=tools,
                                                             chatHistoryStoreService=chatHistoryStoreService)
 

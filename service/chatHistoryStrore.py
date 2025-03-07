@@ -158,7 +158,7 @@ class ChatHistoryStore:
 
             conversations.sort(key=lambda x: x.get("timestamp", ""))
             if len(conversations) <= 1 :
-                print(f"用户 {user_id} 只有一条记录不需要合并")
+                #print(f"用户 {user_id} 只有一条记录不需要合并")
                 return True
 
             summary_text: str = ChatPrompt().summarize(conversations)
@@ -167,7 +167,7 @@ class ChatHistoryStore:
             self.delete_user_history(user_id)
             self.save_conversation(user_id, summary)
 
-            print(f"已成功为用户 {user_id} 生成聊天记录总结")
+            #print(f"已成功为用户 {user_id} 生成聊天记录总结")
             return True
 
         except Exception as e:

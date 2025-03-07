@@ -16,6 +16,7 @@ logic = Logic()
 class ChatRequest(BaseModel):
     question: str
     user_id: Optional[str] = None
+    store_id: Optional[str] = None
     chat_history: Optional[List[ChatHistoryConstant]] = None
     use_history: bool = True
 
@@ -25,6 +26,7 @@ async def chat(request: ChatRequest) -> Dict[str, Any]:
     response = logic.generate_text_agent(
         question=request.question,
         user_id=request.user_id,
+        store_id=request.store_id,
         chat_history=request.chat_history,
         use_history=request.use_history
     )
